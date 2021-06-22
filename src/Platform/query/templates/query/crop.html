@@ -1,0 +1,122 @@
+{%extends "query/base.html" %}
+
+{% block extra_css %}
+<style>
+    .my-button {
+        width: 100%;
+        background-color: rgb(133, 235, 137);
+        border: 1px solid rgb(133, 235, 137);
+        border-radius: 5px;
+        color: black;
+        padding: 8px 10px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        margin: 8px;
+        cursor: pointer;
+    }
+    body {
+        margin: 0;
+        font-size: 100%;
+        background-color: #000000;
+    }
+    .image {
+        width: 800px;
+        height: 800px;
+        left: 50%;
+        margin-left: -400px;
+        margin-top: 100px;
+        position: absolute;
+    }
+    .image img {
+        width: 100%;
+        max-width: 100%;
+        max-height: 100%;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+
+</style>
+{% endblock %}
+
+{% block extra_script %}
+<script>
+    var show_abandon = {{ show_abandon | safe }};
+    var show_cross = {{ show_cross | safe }}
+    if(show_abandon == 0){
+        var btn2 = document.getElementById("grade-btn2");
+        btn2.style = "display: None;";
+    }
+
+    if (show_cross == 1) {
+        setTimeout(function(){
+            var cross = document.getElementById('cross');    
+            cross.style = "display: None;";
+        },500);
+
+        setTimeout(function(){
+            var imf = document.getElementById('imf');    
+            imf.style = "display: inline;";
+        },1000);
+
+        setTimeout(function(){
+            var form = document.getElementById('choice');
+            // form.style = "display: inline;";
+            form.style = "visibility: visible";
+        },4000);
+    }
+    else {
+        var imf = document.getElementById('imf');    
+        imf.style = "display: inline;";
+        var cross = document.getElementById('cross');    
+        cross.style = "display: None;";
+        var form = document.getElementById('choice');
+        // form.style = "display: inline;";
+        form.style = "visibility: visible";
+    }
+    
+</script>
+{% endblock %}
+
+{% block main_body %}
+
+
+<div class="container mt-2" style="color: white;">
+    <h3 style="text-align: center;" >查询{{ question_id }}: {{ query }}</h3>
+
+    <div class="container"  id="img-pair">
+
+        <form name="question" action="{% url 'query:questions' question_id doc_id user_name user_id %}"
+               method="post" style="visibility: hidden;" id = "choice">
+        {% csrf_token %}
+
+
+        <input type="hidden" name="grade" id="grade" >
+            <div class="row justify-content-around">
+                <div class="col-2">
+                    <input type="submit" class="my-button" value="结束搜索"   name="grade" id="grade-btn1" style="background-color: rgb(133, 228, 235);"/>
+                </div>
+                <div class="col-2">
+                    <input type="submit" class="my-button" value="下一个结果"  name="grade"  id="grade-btn2" />
+                </div>
+                <div class="col-2">
+                    <input type="submit" class="my-button" value="进入结果页"  name="grade"  id="grade-btn3" style = "background-color: rgb(199, 235, 133);"/>
+                </div>
+            </div>
+        </form>
+
+        <div class="row justify-content-center image" id = 'imf' style="display: None;">
+            {% load static %}
+            <img style="width: 100%;" src= "{% static img1 %}" />
+        </div>
+        <div class="row justify-content-center image" id = 'cross' style="display: inline;">
+            {% load static %}
+            <img style="width: 100%;" src= "{% static 'query/cross.png' %}" />
+        </div>
+
+    </div>
+</div>
+{% endblock %}

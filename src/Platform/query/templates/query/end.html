@@ -1,0 +1,235 @@
+{%extends "query/base.html" %}
+
+{% block extra_css %}
+<style>
+    .my-button {
+        width: 100%;
+        background-color: rgb(162, 236, 165);
+        border: 1px solid rgb(162, 236, 165);
+        border-radius: 5px;
+        color: black;
+        padding: 8px 10px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        margin: 8px;
+        cursor: pointer;
+        font-weight:bold;
+    }
+    .my-button-hidden {
+        width: 100%;
+        background-color: rgb(162, 236, 165);
+        border: 1px solid rgb(162, 236, 165);
+        border-radius: 5px;
+        color: black;
+        padding: 8px 10px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        margin: 8px;
+        cursor: pointer;
+        display: none;
+        font-weight:bold;
+    }
+    .little-button {
+        width: 100%;
+        background-color: rgb(162, 236, 165);
+        border: 1px solid rgb(162, 236, 165);
+        border-radius: 5px;
+        color: black;
+        padding: 1px 1px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 12px;
+        margin: 1px;
+        cursor: pointer;
+        font-weight:bold;
+    }
+    .tm-albums-container {
+        margin: 50px auto;
+        max-width: 2500px;
+    }
+
+    .tm-album-col {
+        display: flex;
+        justify-content: center;
+    }
+
+    body {
+        margin: 0;
+        font-size: 100%;
+        background-color: #000000;
+    }
+</style>
+{% endblock %}
+
+{% block extra_script %}
+<script>
+    // let recorder = new Recorder({
+    //     sampleBits: 16,
+    //     sampleRate: 16000,
+    //     numChannels: 1,
+    //     compiling: false
+    // });
+
+    // function begin() {
+    //     recorder.start().then(() => {
+    //         console.log("Start recording");
+    //     }, (error) => {
+    //         console.log('${error.name}: ${error.message}');
+    //     })
+    // }
+
+    // function stop() {
+    //     recorder.stop().then(
+    //         ({ blob, buffer }) => {
+    //             let formData = new FormData();
+    //             formData.append("type", "20");
+    //             formData.append("file", blob, "file.wav");
+
+    //             $.ajax({
+    //                 url:"save_audio",
+    //                 type: "POST",
+    //                 data: formData,
+    //                 processData: false,
+    //                 contentType: false,
+    //                 success: function (data) { alert(data) }
+    //             })
+    //         }
+    //     )
+    // }
+    var recorded = false;
+
+    function record(){
+        var bt = document.getElementById("record-button")
+        if(bt.value == "开始录制"){
+            // begin();
+            bt.value = "结束录制"
+        }else{
+            setTimeout(function() {
+                alert("录制成功！");
+                bt.value = "开始录制";
+                recorded = true;
+            }, Math.floor(Math.random()*400) + 100);
+            // stop()
+        }
+    }
+
+    doc_score_dic = {1:0, 2:0, 3:0, 4:0, 5:0, 6:0, 0:0, 7:0, 8:0, 9:0, 'total': 0, 'answer': ""};
+    function set_doc_score(did, rel){
+        if(doc_score_dic[did] != 0){
+            document.getElementById("grade-btn" + doc_score_dic[did] + '-' + did).style.backgroundColor = "rgb(162, 236, 165)";
+            document.getElementById("grade-btn" + doc_score_dic[did] + '-' + did).style.color = "black";
+        }
+        doc_score_dic[did] = rel;
+        
+        document.getElementById("grade-btn" + rel + '-' + did).style.backgroundColor = "rgb(5, 95, 8)";
+        document.getElementById("grade-btn" + doc_score_dic[did] + '-' + did).style.color = "white";
+    }
+    
+    function validateForm() {
+        var img_list = {{img_list|safe}};
+        for (var i=0;i<img_list.length;i++){ 
+            if(doc_score_dic[i] == 0){
+                alert("请完成所有问题！");
+                return false;
+            }
+        }
+        if(doc_score_dic['total'] == 0){
+            alert("请完成所有问题！");
+            return false;
+        }
+        var ans = document.getElementById("user-answer").value;
+        if (!recorded && (ans == "" || ans == null)) {
+            alert("请输入问题的答案！");
+            return false;
+        }
+        doc_score_dic['answer'] = ans;
+        document.getElementById("grade-btn-end").value = JSON.stringify(doc_score_dic);
+        return true;
+    }
+
+</script>
+{% endblock %}
+
+{% block main_body %}
+
+
+<h3 style="text-align: center; color: white">查询{{ question_id }}: {{ query }}</h3>
+    
+<div class="row justify-content-center" id="annt-btn">
+    <div class="col-3">
+        <input type = "button" class="my-button" onclick="record()" value = "开始录制" id = "record-button" style="background-color: white;"/>
+    </div>
+</div>
+<div class="row justify-content-center" id="annt-btn" style="color: white">
+    或回答问题：<input type="text" id="user-answer" placeholder="请输入问题的答案" style="display: inline; height: 30px">
+</div>
+
+<div class="container mt-2" >
+    <div class="row tm-albums-container" id="result_list">
+        {% for item in img_list %} 
+            <figure class="effect-sadie image" style="margin:60px">
+                {% load static %}
+                <img style="width: 100%;" src="{% static item %}" />
+                <div class="row justify-content-around">
+                    <div class="col-2 align-self-center">
+                        <div class="little-button" onclick="set_doc_score({{forloop.counter0}}, 1)" id="grade-btn1-{{forloop.counter0}}" style="background-color: rgb(133, 228, 235);">1</div>
+                    </div>
+                    <div class="col-2 align-self-center">
+                        <div class="little-button" onclick="set_doc_score({{forloop.counter0}}, 2)" id="grade-btn2-{{forloop.counter0}}" style="background-color: rgb(145, 232, 200);">2</div>
+                    </div>
+                    <div class="col-2 align-self-center">
+                        <div class="little-button" onclick="set_doc_score({{forloop.counter0}}, 3)" id="grade-btn3-{{forloop.counter0}}">3</div>
+                    </div>
+                    <div class="col-2 align-self-center">
+                        <div class="little-button" onclick="set_doc_score({{forloop.counter0}}, 4)" id="grade-btn4-{{forloop.counter0}}" style = "background-color: rgb(180, 235, 145);">4</div>
+                    </div>
+                    <div class="col-2 align-self-center">
+                        <div class="little-button" onclick="set_doc_score({{forloop.counter0}}, 5)" id="grade-btn5-{{forloop.counter0}}" style = "background-color: rgb(199, 235, 133);">5</div>
+                    </div>
+                </div>
+            </figure>
+        {% endfor %}
+    </div>
+</div>
+<div class="container mt-2" >
+    <div class="container" style="display: inline;" id="img-pair">
+
+        <form name="question" action="{% url 'query:questions' question_id doc_id user_name user_id %}"
+        onsubmit="return validateForm();" method="post">
+        {% csrf_token %}
+
+        <input type="hidden" name="grade" id="grade">
+            <!-- <div class="row justify-content-around"> -->
+                <h3 style="text-align: center; color: white">搜索过程体验：</h3>
+                <div class="row justify-content-around">
+                    <div class="col-2 align-self-center">
+                        <div class="my-button" onclick="set_doc_score('total',1)" id="grade-btn1-total" style="background-color: rgb(133, 228, 235);">非常不满意</div>
+                    </div>
+                    <div class="col-2 align-self-center">
+                        <div class="my-button" onclick="set_doc_score('total',2)" id="grade-btn2-total" style="background-color: rgb(145, 232, 200);">不满意</div>
+                    </div>
+                    <div class="col-2 align-self-center">
+                        <div class="my-button" onclick="set_doc_score('total',3)" id="grade-btn3-total">一般</div>
+                    </div>
+                    <div class="col-2 align-self-center">
+                        <div class="my-button" onclick="set_doc_score('total',4)" id="grade-btn4-total" style = "background-color: rgb(180, 235, 145);">满意</div>
+                    </div>
+                    <div class="col-2 align-self-center">
+                        <div class="my-button" onclick="set_doc_score('total',5)" id="grade-btn5-total" style = "background-color: rgb(199, 235, 133);">非常满意</div>
+                    </div>
+                </div>
+                <div class="col-2" style = "margin:0 auto; margin-top: 50px;">
+                    <input type="hidden" class="my-button" value = ""  name="endinfo" id="grade-btn-end"/>
+                    <input type="hidden" class="my-button" value = "9"  name="grade" id="grade-btn1"/>
+                    <input type="submit" class="my-button" value = "下一页"  name="grade1" id="grade-btn2" style="background-color:white; display: inline-block; text-align: center;"/>
+                </div>
+            <!-- </div> -->
+        </form>
+    </div>
+</div>
+{% endblock %}

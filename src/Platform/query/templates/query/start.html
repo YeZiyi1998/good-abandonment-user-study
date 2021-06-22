@@ -1,0 +1,41 @@
+{%extends "query/base.html" %}
+
+{% block extra_css %}
+<style>
+    .my-button {
+        width: 100%;
+        background-color: rgb(133, 235, 137);
+        border: 1px solid rgb(133, 235, 137);
+        border-radius: 5px;
+        color: black;
+        padding: 8px 10px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        margin: 8px;
+        cursor: pointer;
+    }
+    body {
+        margin: 0;
+        font-size: 100%;
+        background-color: #000000;
+    }
+</style>
+{% endblock %}
+
+{% block main_body %}
+<div class="container mt-2" style="color: white;">
+    <h3 style="text-align: center;">查询{{ question_id }}: {{ query }}</h3>
+    <form name="question" action="{% url 'query:questions' question_id doc_id user_name user_id %}"
+            method="post">
+        {% csrf_token %}
+        <input type="hidden" name="grade" id="grade" value = '下一个结果'>
+        <div class="row justify-content-center mt-1">
+            <div class="col-2">
+                <input type="submit" value="搜索结果" class="my-button" />
+            </div>
+        </div>
+    </form>
+</div>
+{% endblock %}
