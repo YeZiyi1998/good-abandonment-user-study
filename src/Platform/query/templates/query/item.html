@@ -40,20 +40,21 @@
 <script>
     setTimeout(() => {
         document.getElementById("return").style.visibility = "visible";
-    }, 1000);
+    }, 5000);
 </script>
 {% endblock %}
 
 {% block main_body %}
 
 <div class="container mt-2" style="color: white;">
-    <h3 style="text-align: center;">查询{{ question_id }}: {{ query }}</h3>
+    <h3 style="text-align: center; font-size: 45px;" >查询{{ question_id }}:</h3>
+    <h3 style="text-align: center; font-size: 45px;" > {{ query }}</h3>
     
-    <div class="row justify-content-center" id="annt-btn">
+    <!-- <div class="row justify-content-center" id="annt-btn">
         <div class="col-3">
             <h3 style="text-align: center;">搜索结果展示 文档{{doc_id}}</h3>
         </div>
-    </div>
+    </div> -->
 
     <div class="container" id="img-pair">
         <form name="question" action="{% url 'query:questions' question_id doc_id user_name user_id %}"

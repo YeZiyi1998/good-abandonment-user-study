@@ -26,7 +26,8 @@
 
 {% block main_body %}
 <div class="container mt-2" style="color: white;">
-    <h3 style="text-align: center;">查询{{ question_id }}: {{ query }}</h3>
+    <h3 style="text-align: center; font-size: 45px;" >查询{{ question_id }}:</h3>
+    <h3 style="text-align: center; font-size: 45px;" > {{ query }}</h3>
     <form name="question" action="{% url 'query:questions' question_id doc_id user_name user_id %}"
             method="post">
         {% csrf_token %}

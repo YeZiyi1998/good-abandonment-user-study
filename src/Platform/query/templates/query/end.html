@@ -68,12 +68,26 @@
 
 {% block extra_script %}
 <script>
-    // let recorder = new Recorder({
-    //     sampleBits: 16,
-    //     sampleRate: 16000,
-    //     numChannels: 1,
-    //     compiling: false
-    // });
+    // if (navigator.mediaDevices.getUserMedia) {
+    // const constraints = { audio: true };
+    // navigator.mediaDevices.getUserMedia(constraints).then(
+    //     stream => {
+    //     console.log("授权成功！");
+    //     },
+    //     () => {
+    //     console.error("授权失败！");
+    //     }
+    // );
+    // } else {
+    // console.error("浏览器不支持 getUserMedia");
+    // }
+    // var recorder = new MediaRecorder(stream);
+    // // let recorder = new Recorder({
+    // //     sampleBits: 16,
+    // //     sampleRate: 16000,
+    // //     numChannels: 1,
+    // //     compiling: false
+    // // });
 
     // function begin() {
     //     recorder.start().then(() => {
@@ -114,7 +128,7 @@
                 bt.value = "开始录制";
                 recorded = true;
             }, Math.floor(Math.random()*400) + 100);
-            // stop()
+            // stop();
         }
     }
 
@@ -158,15 +172,16 @@
 {% block main_body %}
 
 
-<h3 style="text-align: center; color: white">查询{{ question_id }}: {{ query }}</h3>
-    
-<div class="row justify-content-center" id="annt-btn">
-    <div class="col-3">
-        <input type = "button" class="my-button" onclick="record()" value = "开始录制" id = "record-button" style="background-color: white;"/>
-    </div>
+<h3 style="text-align: center; font-size: 45px; color: white" >查询{{ question_id }}:</h3>
+<h3 style="text-align: center; font-size: 45px; color: white" > {{ query }}</h3>
+
+
+<div class="row justify-content-center" id="annt-btn" style="color: white; font-size: 18px;">
+    请录制问题的答案：
+        <input type = "button" class="my-button" onclick="record()" value = "开始录制" id = "record-button" style="background-color: white; display: inline; height: 35px; width: 300px;"/>
 </div>
-<div class="row justify-content-center" id="annt-btn" style="color: white">
-    或回答问题：<input type="text" id="user-answer" placeholder="请输入问题的答案" style="display: inline; height: 30px">
+<div class="row justify-content-center" id="annt-btn" style="color: white; font-size: 18px;">
+    或在文本框中回答问题：<input type="text" id="user-answer" placeholder="请输入问题的答案" style="display: inline; height: 35px; width: 600px; ">
 </div>
 
 <div class="container mt-2" >
@@ -183,13 +198,10 @@
                         <div class="little-button" onclick="set_doc_score({{forloop.counter0}}, 2)" id="grade-btn2-{{forloop.counter0}}" style="background-color: rgb(145, 232, 200);">2</div>
                     </div>
                     <div class="col-2 align-self-center">
-                        <div class="little-button" onclick="set_doc_score({{forloop.counter0}}, 3)" id="grade-btn3-{{forloop.counter0}}">3</div>
+                        <div class="little-button" onclick="set_doc_score({{forloop.counter0}}, 4)" id="grade-btn4-{{forloop.counter0}}">3</div>
                     </div>
                     <div class="col-2 align-self-center">
-                        <div class="little-button" onclick="set_doc_score({{forloop.counter0}}, 4)" id="grade-btn4-{{forloop.counter0}}" style = "background-color: rgb(180, 235, 145);">4</div>
-                    </div>
-                    <div class="col-2 align-self-center">
-                        <div class="little-button" onclick="set_doc_score({{forloop.counter0}}, 5)" id="grade-btn5-{{forloop.counter0}}" style = "background-color: rgb(199, 235, 133);">5</div>
+                        <div class="little-button" onclick="set_doc_score({{forloop.counter0}}, 5)" id="grade-btn5-{{forloop.counter0}}" style = "background-color: rgb(180, 235, 145);">4</div>
                     </div>
                 </div>
             </figure>
@@ -212,9 +224,6 @@
                     </div>
                     <div class="col-2 align-self-center">
                         <div class="my-button" onclick="set_doc_score('total',2)" id="grade-btn2-total" style="background-color: rgb(145, 232, 200);">不满意</div>
-                    </div>
-                    <div class="col-2 align-self-center">
-                        <div class="my-button" onclick="set_doc_score('total',3)" id="grade-btn3-total">一般</div>
                     </div>
                     <div class="col-2 align-self-center">
                         <div class="my-button" onclick="set_doc_score('total',4)" id="grade-btn4-total" style = "background-color: rgb(180, 235, 145);">满意</div>

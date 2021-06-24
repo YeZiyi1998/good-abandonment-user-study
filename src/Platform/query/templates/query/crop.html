@@ -60,13 +60,13 @@
         setTimeout(function(){
             var imf = document.getElementById('imf');    
             imf.style = "display: inline;";
-        },500);
+        },1000);
 
         setTimeout(function(){
             var form = document.getElementById('choice');
             // form.style = "display: inline;";
             form.style = "visibility: visible";
-        },500);
+        },4000);
     }
     else {
         var imf = document.getElementById('imf');    
@@ -85,7 +85,8 @@
 
 
 <div class="container mt-2" style="color: white;">
-    <h3 style="text-align: center;" >查询{{ question_id }}: {{ query }}</h3>
+    <h3 style="text-align: center; font-size: 45px;" >查询{{ question_id }}:</h3>
+    <h3 style="text-align: center; font-size: 45px;" > {{ query }}</h3>
 
     <div class="container"  id="img-pair">
 
