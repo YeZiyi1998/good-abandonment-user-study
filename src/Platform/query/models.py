@@ -50,7 +50,7 @@ class QueryModel:
             return self.user_data[user_id]['questions'][question_id]['query'], None
 
     def get_question_len(self, user_id, question_id):
-        return len(self.user_data[user_id]['questions'][question_id]['doc_list'])
+        return min(10, len(self.user_data[user_id]['questions'][question_id]['doc_list']))
 
     def get_question_numbers(self, user_id,):
         return len(self.user_data[user_id]['questions'])
