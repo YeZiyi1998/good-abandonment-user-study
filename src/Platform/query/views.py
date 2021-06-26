@@ -27,6 +27,12 @@ def homepage(request):
 # process function
 def process_question_post(request, question_id, doc_id, user_name, user_id):
     # grade为标注类别，1~8
+
+    if request.POST.get('endinfo') != None:
+        end_info = request.POST.get('endinfo')
+        model.add_info(user_id, question_id, end_info)
+        print("end_info", end_info)
+
     if question_id == MOD - 1:
         question_id = -1
     ans = trigger_dic['start']
@@ -74,10 +80,10 @@ def process_question_post(request, question_id, doc_id, user_name, user_id):
         send_trigger(ans)
         return None, question_id, doc_id
 
-    if request.POST.get('endinfo') != None:
-        end_info = request.POST.get('endinfo')
-        model.add_info(user_id, question_id, end_info)
-        print("end_info", end_info)
+    # if request.POST.get('endinfo') != None:
+    #     end_info = request.POST.get('endinfo')
+    #     model.add_info(user_id, question_id, end_info)
+    #     print("end_info", end_info)
 
     # 返回下一个问题的名字，图片文件名，图片描述 
     query, img1 = model.get_question(user_id, question_id, doc_id)
