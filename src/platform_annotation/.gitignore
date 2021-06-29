@@ -1,0 +1,7 @@
+**/images/**
+**/*.jpg
+**/__pycache__/**
+**/.DS_Store
+**/results/**
+**/.vscode/**
+**/test_data*

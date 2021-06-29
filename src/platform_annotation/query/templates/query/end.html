@@ -1,0 +1,217 @@
+{%extends "query/base.html" %}
+
+{% block extra_css %}
+<style>
+    .my-button {
+        width: 100%;
+        background-color: rgb(76, 175, 80);
+        border: 1px solid rgb(76, 175, 80);
+        border-radius: 5px;
+        padding: 8px 10px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        margin: 8px;
+        cursor: pointer;
+    }
+    .little-button {
+        width: 100%;
+        background-color: rgb(76, 175, 80);
+        border: 1px solid rgb(76, 175, 80);
+        border-radius: 5px;
+
+        padding: 1px 1px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        font-weight: 600;
+        margin: 3px;
+        cursor: pointer;
+    }
+    .tm-albums-container {
+        margin: 50px auto;
+        max-width: 2500px;
+    }
+
+    .tm-album-col {
+        display: flex;
+        justify-content: center;
+    }
+
+</style>
+{% endblock %}
+
+{% block extra_script %}
+<script>
+
+    doc_score_dic = {
+        'rel':{0:0, 1:0, 2:0, 3:0, 4:0, 5:0, 6:0, 7:0, 8:0, 9:0, 10:0, 11:0, 12:0, 13:0, 14:0, 15:0, 16:0, 17:0, 18:0, 19:0,},
+        'nes':{0:0, 1:0, 2:0, 3:0, 4:0, 5:0, 6:0, 7:0, 8:0, 9:0,10:0, 11:0, 12:0, 13:0, 14:0, 15:0, 16:0, 17:0, 18:0, 19:0,},
+        'type':{0:0, 1:0, 2:0, 3:0, 4:0, 5:0, 6:0, 7:0, 8:0, 9:0,10:0, 11:0, 12:0, 13:0, 14:0, 15:0, 16:0, 17:0, 18:0, 19:0,},
+        'spec':{'spec': 0},
+        'total':{'total': 0},
+    };
+    function set_doc_score(name, did, rel){
+        console.log(did);
+        console.log(rel);
+        if(doc_score_dic[name][did] != 0){
+            var tmp = document.getElementById(name+"-btn" + doc_score_dic[name][did] + '-' + did);
+            console.log(tmp);
+            document.getElementById(name+"-btn" + doc_score_dic[name][did] + '-' + did).style.border = "1px solid green";
+        }
+        doc_score_dic[name][did] = rel;
+        
+        document.getElementById(name+"-btn" + rel + '-' + did).style.border = "2px solid black";
+    }
+    
+    function validateForm() {
+        var img_list = {{img_list|safe}};
+        if(doc_score_dic['total']['total'] != 0){
+            document.getElementById("grade-btn-end").value = JSON.stringify(doc_score_dic);
+            return true;
+        }
+        for (var i=0;i<img_list.length;i++){ 
+            if(doc_score_dic['rel'][i] == 0){
+                alert("请完成所有问题！");
+                return false;
+            }
+            if(doc_score_dic['nes'][i] == 0){
+                alert("请完成所有问题！");
+                return false;
+            }
+        }
+        document.getElementById("grade-btn-end").value = JSON.stringify(doc_score_dic);
+        return true;
+    }
+
+</script>
+{% endblock %}
+
+{% block main_body %}
+
+<div >
+    <h3 style="text-align: center;">查询{{ question_id }}: {{ query }}</h3>
+    <div float = "left" class = "row">
+        <hr> 搜索词的精确性？ </hr>
+        <div class="col-2 align-self-center" float = "left">
+            <div class="little-button" onclick="set_doc_score('spec', 'spec', 1)" id="spec-btn1-spec" style = "height: 30px; width: 40px; font-size: 15px; background-color: rgb(180, 235, 145);">1</div>
+        </div>
+        <div class="col-2 align-self-center" float = "left">
+            <div class="little-button" onclick="set_doc_score('spec', 'spec', 2)" id="spec-btn2-spec" style = "height: 30px; width: 40px; font-size: 15px; background-color: rgb(180, 235, 145);">2</div>
+        </div>
+        <div class="col-2 align-self-center" float = "left">
+            <div class="little-button" onclick="set_doc_score('spec', 'spec', 3)" id="spec-btn3-spec" style = "height: 30px; width: 40px; font-size: 15px;">3</div>
+        </div>
+        <div class="col-2 align-self-center" float = "left">
+            <div class="little-button" onclick="set_doc_score('spec', 'spec', 4)" id="spec-btn4-spec" style = "height: 30px; width: 40px; font-size: 15px; background-color: rgb(133, 228, 235);">4</div>
+        </div>
+        <div class="col-2 align-self-center" float = "left">
+            <div class="little-button" onclick="set_doc_score('spec', 'spec', 5)" id="spec-btn5-spec" style = "height: 30px; width: 40px; font-size: 15px; background-color: rgb(133, 228, 235);">5</div>
+        </div>
+    </div>
+    <div class="row" id="result_list" style = "margin-left: 2px; margin-right: 2px;">
+        {% for item in img_list %} 
+            <figure style="margin: 15px;">
+                {% load static %}
+                <img style="width: 100%;" src="{% static item %}" />
+                <div class="row justify-content-around" style = "margin-bottom: 10px;">
+                    <hr> 结果类型 </hr>
+                    <div class="col-2 align-self-center">
+                        <div class="little-button" onclick="set_doc_score('type', {{forloop.counter0}}, 1)" id="type-btn1-{{forloop.counter0}}" style="background-color: rgb(180, 235, 145);">答案框+图片</div>
+                    </div>
+                    <div class="col-2 align-self-center">
+                        <div class="little-button" onclick="set_doc_score('type', {{forloop.counter0}}, 2)" id="type-btn2-{{forloop.counter0}}" style="background-color: rgb(180, 235, 145);">答案框</div>
+                    </div>
+                    <div class="col-2 align-self-center">
+                        <div class="little-button" onclick="set_doc_score('type', {{forloop.counter0}},3)" id="type-btn3-{{forloop.counter0}}">文本链接</div>
+                    </div>
+                    <div class="col-2 align-self-center">
+                        <div class="little-button" onclick="set_doc_score('type', {{forloop.counter0}},4)" id="type-btn4-{{forloop.counter0}}" style = "background-color: rgb(133, 228, 235);">文本链接+图片</div>
+                    </div>
+                    <div class="col-2 align-self-center">
+                        <div class="little-button" onclick="set_doc_score('type', {{forloop.counter0}},5)" id="type-btn5-{{forloop.counter0}}" style = "background-color: rgb(133, 228, 235);">其他</div>
+                    </div>
+                </div>
+                <div class="row justify-content-around" style = "margin-bottom: 10px;">
+                    <hr> 结果好坏 </hr>
+                    <div class="col-2 align-self-center">
+                        <div class="little-button" onclick="set_doc_score('rel', {{forloop.counter0}}, 1)" id="rel-btn1-{{forloop.counter0}}" style="background-color: rgb(180, 235, 145);">1</div>
+                    </div>
+                    <div class="col-2 align-self-center">
+                        <div class="little-button" onclick="set_doc_score('rel', {{forloop.counter0}},2)" id="rel-btn2-{{forloop.counter0}}" style="background-color: rgb(180, 235, 145);">2</div>
+                    </div>
+                    <div class="col-2 align-self-center">
+                        <div class="little-button" onclick="set_doc_score('rel', {{forloop.counter0}}, 3)" id="rel-btn3-{{forloop.counter0}}">3</div>
+                    </div>
+                    <div class="col-2 align-self-center">
+                        <div class="little-button" onclick="set_doc_score('rel', {{forloop.counter0}}, 4)" id="rel-btn4-{{forloop.counter0}}" style = "background-color: rgb(133, 228, 235);">4</div>
+                    </div>
+                    <div class="col-2 align-self-center">
+                        <div class="little-button" onclick="set_doc_score('rel', {{forloop.counter0}}, 5)" id="rel-btn5-{{forloop.counter0}}" style = "background-color: rgb(133, 228, 235);">5</div>
+                    </div>
+                </div>
+                <div float = "left" class = "row">
+                    <hr> 点击必要性 </hr>
+                    <div class="col-2 align-self-center" float = "left">
+                        <div class="little-button" onclick="set_doc_score('nes', {{forloop.counter0}}, 1)" id="nes-btn1-{{forloop.counter0}}" style = "background-color: rgb(180, 235, 145);">必要</div>
+                    </div>
+                    <div class="col-2 align-self-center" float = "left">
+                        <div class="little-button" onclick="set_doc_score('nes', {{forloop.counter0}},2)" id="nes-btn2-{{forloop.counter0}}" style = "background-color: rgb(133, 228, 235);">不必要</div>
+                    </div>
+                    <div class="col-2 align-self-center" float = "left">
+                        <div class="little-button" id="hidden" style = "display:None;">必要</div>
+                    </div>
+                    <div class="col-2 align-self-center" float = "left">
+                        <div class="little-button" id="hidden" style = "display:None;">必要</div>
+                    </div>
+                    <div class="col-2 align-self-center" float = "left">
+                        <div class="little-button" id="hidden" style = "display:None;">必要</div>
+                    </div>
+                </div>
+            </figure>
+        {% endfor %}
+    </div>
+</div>
+
+<div class="container mt-2">
+    <div class="container" style="display: inline;" id="img-pair">
+
+        <form name="question" action="{% url 'query:questions' question_id user_name user_id %}"
+        onsubmit="return validateForm();" method="post">
+        <!-- <form name="question" action="{% url 'query:questions' question_id user_name user_id %}"
+         method="post"> -->
+        {% csrf_token %}
+
+        <input type="hidden" name="grade" id="grade">
+            <!-- <div class="row justify-content-around"> -->
+                <div float = "left" class = "row" style = "display: None;">
+                    <hr> 好的搜索词？ </hr>
+                    <div class="col-2 align-self-center" float = "left">
+                        <div class="little-button" onclick="set_doc_score('total', 'total', 1)" id="total-btn1-total">很差</div>
+                    </div>
+                    <div class="col-2 align-self-center" float = "left">
+                        <div class="little-button" onclick="set_doc_score('total', 'total', 2)" id="total-btn2-total">差</div>
+                    </div>
+                    <div class="col-2 align-self-center" float = "left">
+                        <div class="little-button" onclick="set_doc_score('total', 'total', 3)" id="total-btn3-total">一般</div>
+                    </div>
+                    <div class="col-2 align-self-center" float = "left">
+                        <div class="little-button" onclick="set_doc_score('total', 'total', 4)" id="total-btn4-total">好</div>
+                    </div>
+                    <div class="col-2 align-self-center" float = "left">
+                        <div class="little-button" onclick="set_doc_score('total', 'total', 5)" id="total-btn5-total">很好</div>
+                    </div>
+                </div>
+                
+                <div class="col-2">
+                    <input type="hidden" class="my-button" value = ""  name="endinfo" id="grade-btn-end"/>
+                    <input type="hidden" class="my-button" value = "9"  name="grade" id="grade-btn1"/>
+                    <input type="submit" class="my-button" value = "下一页"  name="grade1" id="grade-btn2" />
+                </div>
+            <!-- </div> -->
+        </form>
+    </div>
+</div>
+{% endblock %}

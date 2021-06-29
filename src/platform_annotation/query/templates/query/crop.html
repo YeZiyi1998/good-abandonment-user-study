@@ -1,0 +1,93 @@
+{%extends "query/base.html" %}
+
+{% block extra_css %}
+<style>
+    .my-button {
+        width: 100%;
+        background-color: rgb(76, 175, 80);
+        border: 1px solid rgb(76, 175, 80);
+        border-radius: 5px;
+        color: white;
+        padding: 8px 10px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        margin: 8px;
+        cursor: pointer;
+    }
+    body {
+        margin: 0;
+        font-size: 100%;
+        background-color: #000000;
+    }
+
+</style>
+{% endblock %}
+
+{% block extra_script %}
+<script>
+    var show_abandon = {{ show_abandon | safe }};
+    if(show_abandon == 0){
+        var btn3 = document.getElementById("grade-btn3");
+        btn3.style = "display: None;";
+    }
+
+    setTimeout(function(){
+        var imf = document.getElementById('imf');    
+        imf.style = "display: inline;";
+        var cross = document.getElementById('cross');    
+        cross.style = "display: None;";
+    },500);
+
+    setTimeout(function(){
+        var form = document.getElementById('choice');
+        form.style = "display: inline;";
+    },1000);
+</script>
+{% endblock %}
+
+{% block main_body %}
+
+
+<div class="container mt-2">
+    <h3 style="text-align: center;" >查询{{ question_id }}: {{ query }}</h3>
+
+    <div class="container"  id="img-pair">
+
+        <form name="question" action="{% url 'query:questions' question_id doc_id user_name user_id %}"
+               method="post" style="display: None;" id = "choice">
+        {% csrf_token %}
+
+
+        <input type="hidden" name="grade" id="grade" >
+            <div class="row justify-content-around">
+                <div class="col-2">
+                    <input type="submit" class="my-button" value="结束搜索"   name="grade" id="grade-btn1" />
+                </div>
+                <div class="col-2">
+                    <input type="submit" class="my-button" value="下一个结果"  name="grade"  id="grade-btn2" />
+                </div>
+                <div class="col-2">
+                    <input type="submit" class="my-button" value="进入结果页"  name="grade"  id="grade-btn3" />
+                </div>
+            </div>
+        </form>
+
+        <div class="row justify-content-around" id = 'imf' style="display: None;">
+            <div class="col-4 align-self-center">
+                {% load static %}
+                <img style="width: 100%;" src= "{% static img1 %}" />
+            </div>
+            
+        </div>
+        <div class="row justify-content-around" id = 'cross' style="display: inline;">
+            <div class="col-4 align-self-center">
+                {% load static %}
+                <img style="width: 100%;" src= "{% static 'query/cross.png' %}" />
+            </div>
+        </div>
+
+    </div>
+</div>
+{% endblock %}

@@ -1,4 +1,5 @@
 src/Platform/query/static/query/mobile_data/
+src/platform_annotation/query/static/query/mobile_data/
 mobile_data/
 .DS_Store
 mobile_data/screenshot/
