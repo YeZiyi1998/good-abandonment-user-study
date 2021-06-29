@@ -1,0 +1,72 @@
+{'id': 1, 'query': '五感六觉是哪五感六觉', 'good_ab_doc_list': [8, 9, 0, 7], 'bad_ab_doc_list': [6, 10, 4], 'other_doc_list': [5, 7, 9, 13, 3, 1, 0, 11, 2, 12]}
+{'id': 2, 'query': '泛华集团是国企吗', 'good_ab_doc_list': [0, 3, 1], 'bad_ab_doc_list': [9, 10, 2, 12, 4], 'other_doc_list': [1, 7, 13, 3, 5, 11, 14, 15, 16, 6, 8]}
+{'id': 3, 'query': '党组织讨论决定问题必须执行什么的原则', 'good_ab_doc_list': [0, 6, 13, 8, 10], 'bad_ab_doc_list': [7, 5, 4, 11], 'other_doc_list': [15, 18, 17, 1, 12, 8, 10, 14, 3, 6, 13, 16, 9, 2]}
+{'id': 4, 'query': '南方科技大学学费多少', 'good_ab_doc_list': [4, 9, 0, 13, 2, 3], 'bad_ab_doc_list': [7, 8, 6, 12, 5, 10], 'other_doc_list': [11, 6, 12, 1, 8, 18, 3, 7, 9, 2, 14, 5, 16, 13, 15, 10, 17, 0]}
+{'id': 5, 'query': '全国有多少个县', 'good_ab_doc_list': [0, 11], 'bad_ab_doc_list': [6, 7], 'other_doc_list': [2, 10, 16, 1, 11, 18, 4, 17, 3, 13, 8, 9, 15, 14, 5, 12]}
+{'id': 6, 'query': '买一只萨摩耶要多少钱？', 'good_ab_doc_list': [10, 14, 5, 0, 2, 1, 13, 7, 11, 8], 'bad_ab_doc_list': [4, 12, 9], 'other_doc_list': [17, 14, 13, 8, 2, 18, 1, 4, 5, 12, 7, 15, 6, 16, 11, 9, 3, 19, 0]}
+{'id': 7, 'query': '90000㎡等于多少公顷？', 'good_ab_doc_list': [3, 1, 11], 'bad_ab_doc_list': [5, 7, 10], 'other_doc_list': [18, 11, 13, 16, 9, 12, 14, 1, 4, 15, 2, 17, 8, 6, 0]}
+{'id': 9, 'query': '水貂多少钱一只好养吗', 'good_ab_doc_list': [0, 12, 10, 9, 3, 4, 6, 7, 11, 8], 'bad_ab_doc_list': [1, 5], 'other_doc_list': [16, 2, 3, 5, 7, 9, 10, 8, 6, 17, 13, 4, 14, 15, 11, 12]}
+{'id': 10, 'query': '血型可以改变吗', 'good_ab_doc_list': [0], 'bad_ab_doc_list': [], 'other_doc_list': []}
+{'id': 11, 'query': '檀香山是哪个国家的', 'good_ab_doc_list': [0, 12, 7, 9], 'bad_ab_doc_list': [1, 4], 'other_doc_list': [13, 14, 10, 3, 7, 5, 1, 2, 9, 12, 4, 11, 8, 16, 15, 6]}
+{'id': 12, 'query': '美国有多少个州', 'good_ab_doc_list': [0, 8, 11, 1, 9, 7], 'bad_ab_doc_list': [5, 2, 6], 'other_doc_list': [10, 9, 14, 7, 15, 8, 13, 12, 11, 3, 1, 4]}
+{'id': 13, 'query': '越共是什么梗', 'good_ab_doc_list': [0], 'bad_ab_doc_list': [2, 1], 'other_doc_list': [6, 8, 4, 5, 16, 15, 19, 12, 10, 18, 2, 7, 13, 1, 3, 11, 14, 9, 17]}
+{'id': 14, 'query': '1英里等于多少公里', 'good_ab_doc_list': [6, 0, 2, 1, 14, 3, 12, 8, 9], 'bad_ab_doc_list': [11, 7, 5], 'other_doc_list': [12, 0, 16, 18, 5, 4, 8, 14, 7, 3, 1, 2, 17, 10, 13, 9, 15]}
+{'id': 16, 'query': '省辖市和地级市哪个大', 'good_ab_doc_list': [2, 11, 0, 14], 'bad_ab_doc_list': [9, 12, 5, 4, 10, 8], 'other_doc_list': [13, 7, 6, 15, 16, 0, 11, 1, 14, 17, 8, 3]}
+{'id': 19, 'query': '亚洲分为哪六个地区', 'good_ab_doc_list': [10, 5, 0], 'bad_ab_doc_list': [3, 9, 6, 4], 'other_doc_list': [17, 5, 14, 16, 7, 11, 0, 2, 1, 12, 8, 15, 4, 13]}
+{'id': 71, 'query': 'statue是什么意思中文', 'good_ab_doc_list': [0], 'bad_ab_doc_list': [], 'other_doc_list': []}
+{'id': 72, 'query': '当代爱国主义的鲜明主题是什么', 'good_ab_doc_list': [0], 'bad_ab_doc_list': [], 'other_doc_list': []}
+{'id': 75, 'query': '连云港是哪个省', 'good_ab_doc_list': [4, 3, 1], 'bad_ab_doc_list': [7, 6, 10, 11, 5, 12, 8, 0, 2, 9], 'other_doc_list': [9, 12, 16, 2, 3, 5, 15, 13, 8, 0, 1, 14]}
+{'id': 78, 'query': '烟雨入江南是什么歌', 'good_ab_doc_list': [11, 3, 12, 0, 13, 10, 1, 7, 8, 5], 'bad_ab_doc_list': [6, 4, 2, 9], 'other_doc_list': [12, 0, 3, 17, 18, 7, 15, 13, 8, 5, 16, 14, 1, 10, 9]}
+{'id': 80, 'query': '脂粉十载，拾刷为妆是什么意思', 'good_ab_doc_list': [8, 9, 0, 10], 'bad_ab_doc_list': [4, 12], 'other_doc_list': [7, 3, 6, 4, 15, 9, 10, 12, 13, 2, 14, 17, 1, 0, 16, 5, 11]}
+{'id': 81, 'query': '哪些牌子的u盘比较好', 'good_ab_doc_list': [13, 0, 4], 'bad_ab_doc_list': [12, 2, 3, 6, 5], 'other_doc_list': [1, 14, 15, 7, 16, 19, 4, 8, 10, 0, 9, 18, 17, 11]}
+{'id': 82, 'query': '翼是哪个省的简称', 'good_ab_doc_list': [2, 8, 9, 1, 3, 13, 6, 11, 10, 7, 12, 0], 'bad_ab_doc_list': [5, 14, 4], 'other_doc_list': [16, 17, 15, 13, 4, 10, 8, 9, 3, 1, 18, 19, 0, 12, 11, 6, 7]}
+{'id': 84, 'query': '市场营销swot是什么意思', 'good_ab_doc_list': [11, 6, 4, 1, 8, 2, 12], 'bad_ab_doc_list': [9, 10, 7], 'other_doc_list': [5, 6, 1, 14, 8, 4, 2, 13, 0, 3, 15, 12, 7, 16]}
+{'id': 88, 'query': '网红书店英语', 'good_ab_doc_list': [14, 11, 13, 0, 6, 1, 2], 'bad_ab_doc_list': [3, 12, 8], 'other_doc_list': [1, 15, 6, 7, 13, 8, 2, 17, 10, 18, 0, 5, 11, 9, 4, 16]}
+{'id': 90, 'query': '一个草字头一个鱼一个利刀念什么', 'good_ab_doc_list': [12, 1, 8, 9, 0, 13], 'bad_ab_doc_list': [11, 5, 14, 7, 4, 6], 'other_doc_list': [15, 2, 10, 16, 3, 19, 8, 9, 13, 17, 18, 0, 1, 6]}
+{'id': 91, 'query': 'lol云顶一费卡有多少张', 'good_ab_doc_list': [9, 2, 8, 3, 6], 'bad_ab_doc_list': [4, 13, 14, 0, 12, 10, 1, 11], 'other_doc_list': [4, 15, 7, 8, 18, 17, 16, 2, 11, 1, 10, 0, 5, 6, 13, 3, 14, 12, 19]}
+{'id': 93, 'query': '烟道焊接中两根烟道距离太近该怎么焊接', 'good_ab_doc_list': [4, 6, 1, 0], 'bad_ab_doc_list': [5, 3, 2], 'other_doc_list': [6, 1, 0, 3, 5, 2]}
+{'id': 95, 'query': '自制凉皮怎么做劲道', 'good_ab_doc_list': [7, 9, 0, 8, 11], 'bad_ab_doc_list': [6, 5, 3, 4], 'other_doc_list': [3, 1, 16, 2, 0, 12, 9, 15, 13, 4, 8, 11, 10, 14]}
+{'id': 96, 'query': '信用卡取现手续费多少', 'good_ab_doc_list': [9, 12, 6, 1], 'bad_ab_doc_list': [4, 10, 0, 3, 5, 7], 'other_doc_list': [18, 11, 15, 6, 13, 2, 16, 12, 14, 17, 0, 8, 7, 3, 5, 1]}
+{'id': 101, 'query': '白洋淀在哪里', 'good_ab_doc_list': [0, 13, 9, 14, 1, 2], 'bad_ab_doc_list': [8, 4, 10, 6, 7], 'other_doc_list': [12, 5, 3, 11, 1, 15, 16, 17, 13, 2, 7, 9, 14]}
+{'id': 103, 'query': '财务管理的两大价值观念是什么', 'good_ab_doc_list': [0, 9, 1, 10, 7, 8, 12, 2], 'bad_ab_doc_list': [13, 5], 'other_doc_list': [2, 4, 12, 1, 8, 5, 14, 11, 9, 10, 3, 7, 6, 16, 15]}
+{'id': 104, 'query': '置业顾问是做什么的', 'good_ab_doc_list': [0, 13, 7], 'bad_ab_doc_list': [3, 12, 1, 10], 'other_doc_list': [4, 11, 2, 17, 9, 7, 8, 5, 16, 15, 6, 13, 14]}
+{'id': 106, 'query': '电子元件商城有哪些', 'good_ab_doc_list': [0], 'bad_ab_doc_list': [8, 5, 6, 13], 'other_doc_list': [10, 3, 14, 9, 16, 6, 18, 15, 2, 12, 11, 7, 17, 13, 1, 4]}
+{'id': 107, 'query': '我慢慢的听雪落下的声音是什么歌', 'good_ab_doc_list': [4, 11, 13, 7], 'bad_ab_doc_list': [14, 12], 'other_doc_list': [1, 19, 2, 3, 15, 9, 0, 13, 7, 11, 17, 18, 6, 5, 8, 10, 16]}
+{'id': 108, 'query': '怎么看电脑是64位还是32位', 'good_ab_doc_list': [2, 1, 0], 'bad_ab_doc_list': [5, 4, 8, 11, 9, 7, 12, 3, 10], 'other_doc_list': [1, 12, 3, 6, 13, 10, 14, 7, 9, 16, 11, 0, 15]}
+{'id': 110, 'query': '全选是ctrl加什么', 'good_ab_doc_list': [9, 5, 12, 11, 1, 0], 'bad_ab_doc_list': [6, 8, 2, 10], 'other_doc_list': [12, 10, 14, 16, 13, 7, 18, 17, 3, 2, 19, 15, 8, 6, 11, 1, 4, 5, 0]}
+{'id': 111, 'query': '拼多多我的评价在哪里查看', 'good_ab_doc_list': [4, 5, 0], 'bad_ab_doc_list': [14, 13], 'other_doc_list': [0, 11, 9, 10, 5, 7, 3, 19, 17, 14, 6, 2, 16, 1, 13, 15, 12, 18, 8]}
+{'id': 112, 'query': '大写英语怎么说', 'good_ab_doc_list': [12, 0], 'bad_ab_doc_list': [10, 11, 7, 8], 'other_doc_list': [13, 8, 18, 16, 1, 4, 5, 0, 17, 3, 6, 2, 9, 15, 14]}
+{'id': 115, 'query': '如何几何画板测动态三角形面积', 'good_ab_doc_list': [0, 3, 1], 'bad_ab_doc_list': [10, 9, 4], 'other_doc_list': [1, 3, 2, 8, 14, 13, 15, 7, 11, 5, 6, 12]}
+{'id': 117, 'query': '兰花什么季节换盆好', 'good_ab_doc_list': [12, 10, 7, 9, 0], 'bad_ab_doc_list': [4, 6], 'other_doc_list': [10, 6, 1, 2, 4, 9, 17, 5, 14, 13, 15, 11, 7, 16, 8, 3, 0]}
+{'id': 118, 'query': '化学PB是什么元素', 'good_ab_doc_list': [4, 9, 2, 1, 0, 11], 'bad_ab_doc_list': [10, 13, 8, 6, 12], 'other_doc_list': [10, 3, 0, 12, 8, 5, 14, 1, 7, 13, 9, 15, 2, 16, 18, 6, 17, 11]}
+{'id': 119, 'query': '指甲油可以带上高铁吗', 'good_ab_doc_list': [2, 6, 11], 'bad_ab_doc_list': [10, 9, 5, 12], 'other_doc_list': [8, 13, 16, 3, 17, 6, 1, 14, 11, 15, 7, 0, 18, 4, 12]}
+{'id': 120, 'query': '采菊东篱下，悠然见南山表现了什么境界', 'good_ab_doc_list': [1, 0, 4], 'bad_ab_doc_list': [5, 10, 14, 2, 12, 6, 7, 9, 8, 11, 13, 3], 'other_doc_list': [8, 15, 3, 18, 14, 12, 9, 17, 11, 13, 0, 2, 6, 19, 7, 4, 16]}
+{'id': 121, 'query': '北欧五国是哪五国', 'good_ab_doc_list': [2, 12, 9, 11, 5, 6, 7, 8, 1, 3], 'bad_ab_doc_list': [10, 4], 'other_doc_list': [15, 12, 6, 11, 17, 13, 5, 7, 16, 4, 3, 9, 0, 8, 14, 1]}
+{'id': 122, 'query': '传统发电形式有哪些', 'good_ab_doc_list': [0, 7, 2, 4, 1], 'bad_ab_doc_list': [13, 5, 8, 3, 10, 6, 11, 12, 9], 'other_doc_list': [15, 8, 4, 5, 10, 16, 14, 2, 12, 7, 3, 1, 17, 11, 9, 6]}
+{'id': 123, 'query': '国际快递有哪些公司有', 'good_ab_doc_list': [14, 3, 9, 4, 13, 10, 6, 0, 7, 1, 5, 8], 'bad_ab_doc_list': [11, 12], 'other_doc_list': [3, 2, 8, 16, 1, 4, 12, 17, 15, 10, 6, 5, 0, 9, 7, 13]}
+{'id': 124, 'query': '95380是什么快递', 'good_ab_doc_list': [8, 9, 2, 0, 7], 'bad_ab_doc_list': [6, 13, 3], 'other_doc_list': [10, 1, 12, 14, 0, 5, 6, 4, 7, 15, 2, 11, 9, 3, 13]}
+{'id': 127, 'query': '电脑壁纸怎么换', 'good_ab_doc_list': [1, 0, 5, 11, 10, 9, 8], 'bad_ab_doc_list': [7, 12, 2, 6], 'other_doc_list': [0, 3, 13, 10, 16, 11, 5, 14, 15, 9, 4, 8, 17]}
+{'id': 129, 'query': '一体化定价是什么', 'good_ab_doc_list': [0], 'bad_ab_doc_list': [5, 9, 4], 'other_doc_list': [8, 1, 12, 14, 10, 3, 6, 7, 11, 13, 2, 15]}
+{'id': 21, 'query': '埃及位于哪里', 'good_ab_doc_list': [2, 1, 8, 13], 'bad_ab_doc_list': [4, 5, 7, 3, 6], 'other_doc_list': [12, 8, 0, 10, 13, 9, 11, 1, 6]}
+{'id': 22, 'query': '百慕大三角位于哪里', 'good_ab_doc_list': [1, 0, 2], 'bad_ab_doc_list': [10, 7, 6, 5, 8, 3], 'other_doc_list': [6, 9, 3, 5, 13, 8, 4, 12, 2, 11, 0]}
+{'id': 23, 'query': 'include是什么意思', 'good_ab_doc_list': [8, 4, 6, 1, 2, 12, 0, 7], 'bad_ab_doc_list': [5, 13], 'other_doc_list': [11, 6, 3, 13, 10, 15, 16, 1, 5, 4, 7, 9, 14, 2, 12, 17, 0]}
+{'id': 25, 'query': '猫能吃榴莲吗', 'good_ab_doc_list': [1, 0], 'bad_ab_doc_list': [5, 13, 12, 14, 9, 11, 10, 4, 2], 'other_doc_list': [3, 11, 6, 18, 10, 8, 7, 17, 12, 0, 4, 14, 15, 16, 2, 9]}
+{'id': 27, 'query': '1万泰铢是多少美金', 'good_ab_doc_list': [0], 'bad_ab_doc_list': [1], 'other_doc_list': [12, 14, 10, 7, 5, 15, 3, 6, 16, 13, 2, 9, 4, 11, 8]}
+{'id': 29, 'query': '雷欧奥特曼赛文断腿哪一集', 'good_ab_doc_list': [8, 0, 13, 2, 7, 11, 10, 9, 1], 'bad_ab_doc_list': [12, 6], 'other_doc_list': [4, 9, 5, 0, 13, 16, 15, 10, 18, 2, 3, 14, 17, 7, 1, 11]}
+{'id': 30, 'query': '泵送和非泵送指的是什么', 'good_ab_doc_list': [0, 2, 1, 4], 'bad_ab_doc_list': [6, 7], 'other_doc_list': [18, 1, 12, 14, 8, 3, 5, 4, 2, 16, 11, 13, 9, 15, 17, 7, 10, 19]}
+{'id': 31, 'query': '烧结普通砖的标准尺寸是多少', 'good_ab_doc_list': [0], 'bad_ab_doc_list': [4, 3, 5], 'other_doc_list': [14, 17, 18, 16, 8, 1, 2, 12, 6, 13, 11, 9, 15, 10, 7]}
+{'id': 32, 'query': '砖胎膜用什么砖砌筑', 'good_ab_doc_list': [0], 'bad_ab_doc_list': [2, 4], 'other_doc_list': [9, 8, 16, 10, 3, 11, 1, 2, 13, 7, 12, 15, 14, 5, 4, 6]}
+{'id': 33, 'query': '亮度最高的火焰区域是什么区？', 'good_ab_doc_list': [3, 14, 10, 11, 2, 9, 0, 8, 6, 7, 1], 'bad_ab_doc_list': [12, 13], 'other_doc_list': [2, 8, 16, 4, 18, 17, 5, 15, 13, 0, 14, 10, 9, 11, 6, 7, 1]}
+{'id': 36, 'query': '标准节流装置包括哪几部分？', 'good_ab_doc_list': [3, 10, 6, 2, 1], 'bad_ab_doc_list': [12, 11, 0], 'other_doc_list': [18, 1, 7, 13, 6, 14, 16, 10, 5, 0, 2, 4, 15, 17, 9, 8]}
+{'id': 39, 'query': '迎风流泪是什么原因', 'good_ab_doc_list': [1, 0, 2], 'bad_ab_doc_list': [3, 6, 4, 5], 'other_doc_list': [2, 14, 0, 9, 11, 13, 15, 7, 10, 8, 12]}
+{'id': 42, 'query': 'a2b2型化合物是什么', 'good_ab_doc_list': [0, 10, 11, 12], 'bad_ab_doc_list': [2, 4, 5], 'other_doc_list': [16, 2, 6, 14, 13, 10, 7, 4, 11, 19, 9, 12, 17, 5, 8, 1, 15, 3, 18]}
+{'id': 44, 'query': '葵花籽有脂肪吗', 'good_ab_doc_list': [6, 0], 'bad_ab_doc_list': [11, 2, 9], 'other_doc_list': [8, 4, 5, 0, 7, 10, 13, 3, 14, 12, 1, 15, 16]}
+{'id': 53, 'query': '香槟玫瑰花代表什么意思', 'good_ab_doc_list': [0, 2, 13, 1, 10, 14, 9, 3, 7, 4, 5], 'bad_ab_doc_list': [8, 6], 'other_doc_list': [1, 5, 14, 19, 17, 13, 2, 11, 4, 18, 15, 9, 12, 10, 16, 3, 7]}
+{'id': 57, 'query': '电脑ip地址怎么看', 'good_ab_doc_list': [1, 0], 'bad_ab_doc_list': [7, 6, 5], 'other_doc_list': [9, 12, 13, 17, 18, 6, 8, 14, 0, 4, 10, 5, 11, 3, 15, 2, 16, 19]}
+{'id': 58, 'query': '摩托车可以停在机动车停车位上吗', 'good_ab_doc_list': [0, 1], 'bad_ab_doc_list': [2, 8, 5], 'other_doc_list': [2, 16, 4, 17, 9, 10, 18, 15, 12, 5, 11, 6, 7, 19, 1, 14, 8, 3, 13]}
+{'id': 59, 'query': '湿疹吃什么食物好得快', 'good_ab_doc_list': [1, 3], 'bad_ab_doc_list': [9, 2, 0, 6, 7, 10, 5], 'other_doc_list': [14, 6, 3, 15, 4, 7, 16, 13, 8, 10, 17, 12, 0, 5, 11]}
+{'id': 61, 'query': '被蚊子咬了怎么止痒消肿', 'good_ab_doc_list': [14, 5, 10, 9, 0, 8, 12, 2, 13, 4], 'bad_ab_doc_list': [1, 6], 'other_doc_list': [12, 5, 13, 7, 15, 0, 8, 2, 4, 10, 9, 3, 11]}
+{'id': 62, 'query': '235是多少码的鞋子', 'good_ab_doc_list': [3, 13], 'bad_ab_doc_list': [4, 9, 0, 7], 'other_doc_list': [5, 16, 9, 0, 15, 2, 6, 1, 18, 8, 4, 11, 7, 14, 12, 17, 13, 10]}
+{'id': 68, 'query': '摩洛哥是哪个国家', 'good_ab_doc_list': [5, 7, 10, 2, 4, 0, 11, 8, 1], 'bad_ab_doc_list': [9, 6, 12], 'other_doc_list': [13, 12, 4, 14, 15, 1, 8, 10, 11, 6, 2, 16, 3, 9, 7, 0]}
+{'id': 69, 'query': '47.28欧元等于多少美元', 'good_ab_doc_list': [], 'bad_ab_doc_list': [7, 1, 8, 10], 'other_doc_list': [11, 15, 12, 6, 17, 13, 1, 3, 5, 14, 8, 4, 0, 2, 10, 16, 9]}
+{'id': 70, 'query': '瘸子粤语怎么说', 'good_ab_doc_list': [0], 'bad_ab_doc_list': [11, 10, 9], 'other_doc_list': [9, 10, 1, 12, 5, 2, 3, 13, 4, 6, 8, 7]}
