@@ -1,42 +1,55 @@
-<!DOCTYPE html>
-<html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<meta charset="utf-8">
-<title>THUIR搜索行为用户实验</title>
-<style>
-    body {
-        margin: 0;
-        font-size: 100%;
-        background-color: #000000;
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+<script src="jquery-1.7.2.min.js" language="javascript"></script>
+<script>
+    function  f_getURL(){
+        var url = "acceptfile.php";
+        return url;
     }
-    p, h1, h2, h3, h4, h5, h6 {
-        font-family: Arial, Helvetica, sans-serif;
+    function f_getMAX(){
+        return 60;//最长录音时间
     }
-    .header {
-        background-color: #f2f2f2;
-        padding: 5px;
-        text-align: center;
+    function f_getMIN(){
+        return 10; //最小录音时间
     }
-    div.header h1 {
-        font-size: 2em;
+    function f_complete(filename){
+        alert(filename);
+        /*if (typeof(SUPER_REPLY) != 'undefined') {
+            if (wysiwyg) {
+                editdoc.body.innerHTML  = '[audio]rec/'  filename  '[/audio]';
+            } else {
+                editdoc.value  = '[audio]rec/'  filename  '[/audio]';
+            }
+        }*/
+        var test=jQuery('#fastpostmessage').val()   '[audio]'  filename  '[/audio]';
+        alert(test);
+        jQuery('#fastpostmessage').val(test);
+        /*if (jQuery('.pnpost').css('display') == 'none') {
+            jQuery('#fastpostform').submit();
+        }*/
+ 
     }
-    body {
-        margin: 0;
-        font-size: 100%;
-        background-color: #000000;
-    }
-</style>
-<link href="/static/bootstrap/css/bootstrap.css" rel="stylesheet">
-<script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
-<script src="/static/bootstrap/js/bootstrap.min.js"></script>
-{% block extra_css %}
-{% endblock %}
+</script>
+ 
 </head>
-
-<body >
-    {% block main_body %}
-    {% endblock %}
+ 
+<body>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<div id=""><textarea name="fastpostmessage" id="fastpostmessage" cols="60" rows="5"></textarea></div>
+<p>
+  <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" codebase="http://fpdownload.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=8,0,0,0" width="808" height="140" id="as_js" align="middle">
+         <param name="allowScriptAccess" value="sameDomain" />
+         <param name="movie" value="./bbsRecorder.swf" />
+         <param name="quality" value="high" />
+         <param name="wmode" value="transparent">
+         <param name="bgcolor" value="#cccccc" />
+         <embed src="./bbsRecorder.swf" vmode="transparent" quality="high" bgcolor="#cccccc" width="808" height="140" name="as-js" align="middle" allowScriptAccess="always" type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/go/getflashplayer" />
+  </object>
+</p>
 </body>
-{% block extra_script %}
-{% endblock %}
 </html>

@@ -147,5 +147,14 @@ def thanks(request):
 
 # save audio
 def save_audio(request):
-    print(request)
+    print("in")
+    f1 = request.FILES.get('upfile')
+    if f1 != None:
+        # 文件保存路径
+        fname = f1.name.split('_')
+        fname = '../../user_data/' + fname[0] + '/' + fname[1] + '.mp3'
+        with open(fname, 'wb') as pic:
+            for c in f1.chunks():
+                pic.write(c)
+            
     return HttpResponse('上传成功！')
