@@ -34,7 +34,7 @@
         font-weight:bold;
     }
     .little-button {
-        width: 100%;
+        width: 80%;
         background-color: rgb(162, 236, 165);
         border: 1px solid rgb(162, 236, 165);
         border-radius: 5px;
@@ -42,9 +42,8 @@
         padding: 1px 1px;
         text-align: center;
         text-decoration: none;
-        display: inline-block;
         font-size: 12px;
-        margin: 1px;
+        margin-top: 6px;
         cursor: pointer;
         font-weight:bold;
     }
@@ -67,60 +66,92 @@
 {% endblock %}
 
 {% block extra_script %}
+<script src="/static/bootstrap/js/recorder.mp3.min.js"></script>
+<script src="/static/bootstrap/js/jquery.cookie.js"></script>
 <script>
-    // if (navigator.mediaDevices.getUserMedia) {
-    // const constraints = { audio: true };
-    // navigator.mediaDevices.getUserMedia(constraints).then(
-    //     stream => {
-    //     console.log("授权成功！");
-    //     },
-    //     () => {
-    //     console.error("授权失败！");
-    //     }
-    // );
-    // } else {
-    // console.error("浏览器不支持 getUserMedia");
-    // }
-    // var recorder = new MediaRecorder(stream);
-    // // let recorder = new Recorder({
-    // //     sampleBits: 16,
-    // //     sampleRate: 16000,
-    // //     numChannels: 1,
-    // //     compiling: false
-    // // });
+    
+    var grade_color = ["",
+        "rgb(133, 228, 235)",
+        "rgb(145, 232, 200)",
+        "rgb(162, 236, 165)",
+        "rgb(180, 235, 145)",
+        "rgb(199, 235, 133)",
+    ]
 
-    // function begin() {
-    //     recorder.start().then(() => {
-    //         console.log("Start recording");
-    //     }, (error) => {
-    //         console.log('${error.name}: ${error.message}');
-    //     })
-    // }
+    var rec;
+    /**调用open打开录音请求好录音权限**/
+    var recOpen=function(success){//一般在显示出录音按钮或相关的录音界面时进行此方法调用，后面用户点击开始录音时就能畅通无阻了
+        rec=Recorder({
+            type:"mp3",sampleRate:16000,bitRate:16 //mp3格式，指定采样率hz、比特率kbps，其他参数使用默认配置；注意：是数字的参数必须提供数字，不要用字符串；需要使用的type类型，需提前把格式支持文件加载进来，比如使用wav格式需要提前加载wav.js编码引擎
+            ,onProcess:function(buffers,powerLevel,bufferDuration,bufferSampleRate,newBufferIdx,asyncEnd){
+                //录音实时回调，大约1秒调用12次本回调
+                //可利用extensions/waveview.js扩展实时绘制波形
+                //可利用extensions/sonic.js扩展实时变速变调，此扩展计算量巨大，onProcess需要返回true开启异步模式
+            }
+        });
 
-    // function stop() {
-    //     recorder.stop().then(
-    //         ({ blob, buffer }) => {
-    //             let formData = new FormData();
-    //             formData.append("type", "20");
-    //             formData.append("file", blob, "file.wav");
+        //var dialog=createDelayDialog(); 我们可以选择性的弹一个对话框：为了防止移动端浏览器存在第三种情况：用户忽略，并且（或者国产系统UC系）浏览器没有任何回调，此处demo省略了弹窗的代码
+        rec.open(function(){//打开麦克风授权获得相关资源
+            //dialog&&dialog.Cancel(); 如果开启了弹框，此处需要取消
+            //rec.start() 此处可以立即开始录音，但不建议这样编写，因为open是一个延迟漫长的操作，通过两次用户操作来分别调用open和start是推荐的最佳流程
+            
+            success&&success();
+        },function(msg,isUserNotAllow){//用户拒绝未授权或不支持
+            //dialog&&dialog.Cancel(); 如果开启了弹框，此处需要取消
+            console.log((isUserNotAllow?"UserNotAllow，":"")+"无法录音:"+msg);
+        });
+    };
 
-    //             $.ajax({
-    //                 url:"save_audio",
-    //                 type: "POST",
-    //                 data: formData,
-    //                 processData: false,
-    //                 contentType: false,
-    //                 success: function (data) { alert(data) }
-    //             })
-    //         }
-    //     )
-    // }
+    /**开始录音**/
+    function recStart(){//打开了录音后才能进行start、stop调用
+        rec.start();
+    };
+
+    /**结束录音**/
+    function recStop(){
+        rec.stop(function(blob,duration){
+            console.log(blob,(window.URL||webkitURL).createObjectURL(blob),"时长:"+duration+"ms");
+            rec.close();//释放录音资源，当然可以不释放，后面可以连续调用start；但不释放时系统或浏览器会一直提示在录音，最佳操作是录完就close掉
+            rec=null;
+            
+            //已经拿到blob文件对象想干嘛就干嘛：立即播放、上传
+
+            /*** 【实现上传】 ***/
+            var form=new FormData();
+            var uid = {{user_id|safe}};
+            var qid = {{question_id|safe}};
+            form.append("upfile", blob, uid+"_"+qid); //和普通form表单并无二致，后端接收到upfile参数的文件，文件名为recorder.mp3
+            //...其他表单参数
+            $.ajax({
+                url:'/query/save_audio/' //上传接口地址
+                ,type:"POST"
+                ,contentType:false //让xhr自动处理Content-Type header，multipart/form-data需要生成随机的boundary
+                ,processData:false //不要处理data，让xhr自动处理
+                ,data:form
+                ,headers: {
+                "X-CSRFToken": $.cookie('csrftoken')  // Django 403处理
+                }
+                ,success:function(v){
+                    console.log("上传成功",v);
+                }
+                ,error:function(s){
+                    console.error("上传失败",s);
+                }
+            });
+        },function(msg){
+            console.log("录音失败:"+msg);
+            rec.close();//可以通过stop方法的第3个参数来自动调用close
+            rec=null;
+        });
+    };
+
     var recorded = false;
-
     function record(){
         var bt = document.getElementById("record-button")
         if(bt.value == "开始录制"){
-            // begin();
+            recOpen(function(){
+                recStart();
+            });
             bt.value = "结束录制"
         }else{
             setTimeout(function() {
@@ -128,14 +159,24 @@
                 bt.value = "开始录制";
                 recorded = true;
             }, Math.floor(Math.random()*400) + 100);
-            // stop();
+            recStop();
+        }
+    }
+    doc_score_dic = {1:0, 2:0, 3:0, 4:0, 5:0, 6:0, 0:0, 7:0, 8:0, 9:0, 'total': 0, 'answer': ""};
+    function no_answer(){
+        doc_score_dic['answer'] = "None";
+        var bt = document.getElementById("no-answer-button")
+        if(bt.style.backgroundColor == "white"){
+            recorded = true;
+            bt.style.backgroundColor = "yellow";
+        }else{
+            bt.style.backgroundColor = "white";
         }
     }
 
-    doc_score_dic = {1:0, 2:0, 3:0, 4:0, 5:0, 6:0, 0:0, 7:0, 8:0, 9:0, 'total': 0, 'answer': ""};
     function set_doc_score(did, rel){
         if(doc_score_dic[did] != 0){
-            document.getElementById("grade-btn" + doc_score_dic[did] + '-' + did).style.backgroundColor = "rgb(162, 236, 165)";
+            document.getElementById("grade-btn" + doc_score_dic[did] + '-' + did).style.backgroundColor = grade_color[rel];
             document.getElementById("grade-btn" + doc_score_dic[did] + '-' + did).style.color = "black";
         }
         doc_score_dic[did] = rel;
@@ -161,7 +202,9 @@
             alert("请输入问题的答案！");
             return false;
         }
-        doc_score_dic['answer'] = ans;
+        if(doc_score_dic['answer'] != 'None'){
+            doc_score_dic['answer'] = ans;
+        }
         document.getElementById("grade-btn-end").value = JSON.stringify(doc_score_dic);
         return true;
     }
@@ -179,6 +222,7 @@
 <div class="row justify-content-center" id="annt-btn" style="color: white; font-size: 18px;">
     请录制问题的答案：
         <input type = "button" class="my-button" onclick="record()" value = "开始录制" id = "record-button" style="background-color: white; display: inline; height: 35px; width: 300px;"/>
+        <input type = "button" class="my-button" onclick="no_answer()" value = "没有答案请点这里" id = "no-answer-button" style="background-color: white; display: inline; height: 35px; width: 190px;"/>
 </div>
 <div class="row justify-content-center" id="annt-btn" style="color: white; font-size: 18px;">
     或在文本框中回答问题：<input type="text" id="user-answer" placeholder="请输入问题的答案" style="display: inline; height: 35px; width: 600px; ">
@@ -189,19 +233,19 @@
         {% for item in img_list %} 
             <figure class="effect-sadie image" style="margin:60px">
                 {% load static %}
-                <img style="width: 100%;" src="{% static item %}" />
+                <img style="width: 100%;" src="{% static item %}" style="display: inline;"/>
                 <div class="row justify-content-around">
                     <div class="col-2 align-self-center">
-                        <div class="little-button" onclick="set_doc_score({{forloop.counter0}}, 1)" id="grade-btn1-{{forloop.counter0}}" style="background-color: rgb(133, 228, 235);">1</div>
+                        <div class="little-button" onclick="set_doc_score({{forloop.counter0}}, 1)" id="grade-btn1-{{forloop.counter0}}" style="background-color: rgb(133, 228, 235); width: 45px; height: 30px; font-size: 18px;">1</div>
                     </div>
                     <div class="col-2 align-self-center">
-                        <div class="little-button" onclick="set_doc_score({{forloop.counter0}}, 2)" id="grade-btn2-{{forloop.counter0}}" style="background-color: rgb(145, 232, 200);">2</div>
+                        <div class="little-button" onclick="set_doc_score({{forloop.counter0}}, 2)" id="grade-btn2-{{forloop.counter0}}" style="background-color: rgb(145, 232, 200); width: 45px; height: 30px; font-size: 18px;">2</div>
                     </div>
                     <div class="col-2 align-self-center">
-                        <div class="little-button" onclick="set_doc_score({{forloop.counter0}}, 4)" id="grade-btn4-{{forloop.counter0}}">3</div>
+                        <div class="little-button" onclick="set_doc_score({{forloop.counter0}}, 4)" id="grade-btn4-{{forloop.counter0}}" style="background-color: rgb(180, 235, 145); width: 45px; height: 30px; font-size: 18px;">3</div>
                     </div>
                     <div class="col-2 align-self-center">
-                        <div class="little-button" onclick="set_doc_score({{forloop.counter0}}, 5)" id="grade-btn5-{{forloop.counter0}}" style = "background-color: rgb(180, 235, 145);">4</div>
+                        <div class="little-button" onclick="set_doc_score({{forloop.counter0}}, 5)" id="grade-btn5-{{forloop.counter0}}" style = "background-color: rgb(199, 235, 133); width: 45px; height: 30px; font-size: 18px;">4</div>
                     </div>
                 </div>
             </figure>
@@ -224,6 +268,9 @@
                     </div>
                     <div class="col-2 align-self-center">
                         <div class="my-button" onclick="set_doc_score('total',2)" id="grade-btn2-total" style="background-color: rgb(145, 232, 200);">不满意</div>
+                    </div>
+                    <div class="col-2 align-self-center">
+                        <div class="my-button" onclick="set_doc_score('total',3)" id="grade-btn3-total" >一般</div>
                     </div>
                     <div class="col-2 align-self-center">
                         <div class="my-button" onclick="set_doc_score('total',4)" id="grade-btn4-total" style = "background-color: rgb(180, 235, 145);">满意</div>
