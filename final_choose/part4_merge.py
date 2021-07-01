@@ -14,5 +14,6 @@ def get_raw():
     return raw_file, after_qid, lost_after_qid_number
 
 a1 = json.load(open('../random_data/select_left.json'))
+a2 = json.load(open('../random_data/select_raw.json'))
 raw_file, after_qid, lost_after_qid_number = get_raw()
-json.dump(after_qid + a1, open('../random_data/select_90.json', 'w'))
+json.dump(a2 + a1, open('../random_data/select_90.json', 'w'))
