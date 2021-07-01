@@ -38,6 +38,102 @@ def get_raw():
             after_qid.append(raw_file[i])
     return raw_file, after_qid, lost_after_qid_number
 
+def pilot_choose_raw(total_dic):
+    raw_file, after_qid, lost_after_qid_number = get_raw()
+    print('lost_after_qid_number: ', lost_after_qid_number)
+    for key in lost_after_qid_number.keys():
+        lost_after_qid_number[key] = 18 - lost_after_qid_number[key]
+    qid_set = [item['id'] for idx, item in enumerate(raw_file) if idx not in dis_select_id]
+    find_queries = {0:[],1:[],2:[],3:[],4:[]}
+    find_queries_soft = {0:[],1:[],2:[],3:[],4:[]}
+    for qid in total_dic.keys():
+        if int(qid) not in qid_set:
+            continue
+        good_ab = []
+        bad_ab = []
+        for i in range(len(total_dic[qid]['doc_list'])):
+            if total_dic[qid]['end_info']['rel'][str(i)] > 3.8 and total_dic[qid]['end_info']['nes'][str(i)] >= 1.4:
+                good_ab.append(i)
+            elif total_dic[qid]['end_info']['rel'][str(i)] <= 3.8:
+                bad_ab.append(i)
+        if len(bad_ab) < 5 and len(good_ab) >= 2:
+            find_queries[len(bad_ab)].append(qid)
+        elif len(bad_ab) >= 5 and len(good_ab) >= 2:
+            find_queries[4].append(qid)
+        if len(bad_ab) < 5 and len(good_ab) >= 1:
+            find_queries_soft[len(bad_ab)].append(qid)
+        elif len(bad_ab) >= 5 and len(good_ab) >= 1:
+            find_queries_soft[4].append(qid)  
+    for key in find_queries.keys():
+        random.shuffle(find_queries[key])
+        random.shuffle(find_queries_soft[key])
+    for key in find_queries.keys():
+        print(key, len(find_queries[key]))
+
+    out_qid = {}   
+    out_qid_set = set()
+    for i in range(4,-1,-1):
+        out_qid[i] = []
+        print('select '+str(i), end=',')
+        previous_len = len(out_qid_set)
+        for num in range(lost_after_qid_number[i]):
+            flag=False
+            for j in range(4,-1,-1):
+                if j >= i:
+                    for item in find_queries[j]:
+                        if item not in out_qid_set:
+                            out_qid[i].append(item)
+                            out_qid_set.add(item)
+                            flag = True
+                            break
+                if flag:
+                    break
+        for num in range(lost_after_qid_number[i] - len(out_qid[i])):
+            flag=False
+            for j in range(4,-1,-1):
+                if j >= i:
+                    for item in find_queries_soft[j]:
+                        if item not in out_qid_set:
+                            out_qid[i].append(item)
+                            out_qid_set.add(item)
+                            flag = True
+                            break
+                if flag:
+                    break
+
+        print(len(out_qid_set)-previous_len)
+    after_qid = []
+    fw = open('bad_len.txt','w')
+    for bad_len in out_qid.keys():
+        for qid in out_qid[bad_len]:
+            good_ab = []
+            bad_ab = []
+            for i in range(len(total_dic[qid]['doc_list'])):
+                if total_dic[qid]['end_info']['rel'][str(i)] > 3.8 and total_dic[qid]['end_info']['nes'][str(i)] >= 1.4:
+                    good_ab.append(i)
+                elif total_dic[qid]['end_info']['rel'][str(i)] <= 3.8:
+                    bad_ab.append(i)
+            select_i = []
+            tmp_doc_list = []
+            random.shuffle(bad_ab)
+            random.shuffle(good_ab)
+            for i in range(bad_len):
+                tmp_doc_list.append(total_dic[qid]['doc_list'][bad_ab[i]])
+                select_i.append(bad_ab[i])
+            tmp_doc_list.append(total_dic[qid]['doc_list'][good_ab[0]])
+            select_i.append(good_ab[0])
+            left_i = [i  for i in range(len(total_dic[qid]['doc_list'])) if i not in select_i]
+            random.shuffle(left_i)
+            for i in range(len(left_i)):
+                tmp_doc_list.append(total_dic[qid]['doc_list'][left_i[i]])
+            total_dic[qid]['doc_list'] = tmp_doc_list
+            total_dic[qid]['bad_len'] = bad_len
+            fw.write(str(bad_len))
+            fw.write('\n')
+            after_qid.append(total_dic[qid])
+    fw.close()
+    json.dump(list(after_qid), open('../random_data/select_raw.json','w'))
+
 def pilot_choose(total_dic):
     raw_file, after_qid, lost_after_qid_number = get_raw()
     print('lost_after_qid_number: ', lost_after_qid_number)
@@ -134,5 +230,5 @@ def pilot_choose(total_dic):
 
 
 clean(total_dic)
-pilot_choose(total_dic)
+pilot_choose_raw(total_dic)
 
