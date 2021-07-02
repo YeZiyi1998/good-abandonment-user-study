@@ -5,6 +5,7 @@ from django.http import  HttpResponse, HttpResponseRedirect, Http404
 from .models import QueryModel
 from .trigger_test import send_trigger, trigger_dic, chinese_trigger_dic
 import time
+import os
 
 # 数据集和结果保存路径
 IMG_PATH = 'query/mobile_data/'
@@ -19,7 +20,7 @@ def homepage(request):
     if request.POST.get('user_name'):
         user_id = str(request.POST['user_id'])
         user_name = request.POST['user_name']
-        model.add_new_user(user_id)
+        model.add_new_user(user_id, user_name)
         return HttpResponseRedirect(reverse('query:questions', args=(-1 + MOD, 15, user_name, user_id)))
     else:
         return render(request, 'query/homepage.html')
@@ -152,7 +153,9 @@ def save_audio(request):
     if f1 != None:
         # 文件保存路径
         fname = f1.name.split('_')
-        fname = '../../user_data/' + fname[0] + '/' + fname[1] + '.mp3'
+        if os.path.exists('../../user_data/' + fname[0] + '/record/') == False:
+            os.mkdir('../../user_data/' + fname[0] + '/record/')
+        fname = '../../user_data/' + fname[0] + '/record/' + fname[1] + '.mp3'
         with open(fname, 'wb') as pic:
             for c in f1.chunks():
                 pic.write(c)

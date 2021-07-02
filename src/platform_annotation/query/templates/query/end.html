@@ -179,7 +179,7 @@
     <div class="container" style="display: inline;" id="img-pair">
 
         <form name="question" action="{% url 'query:questions' question_id user_name user_id %}"
-        onsubmit="return validateForm();" method="post">
+        onsubmit="return true;" method="post">
         <!-- <form name="question" action="{% url 'query:questions' question_id user_name user_id %}"
          method="post"> -->
         {% csrf_token %}

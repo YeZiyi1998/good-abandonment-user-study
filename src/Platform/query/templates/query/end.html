@@ -66,10 +66,12 @@
 {% endblock %}
 
 {% block extra_script %}
-<script src="/static/bootstrap/js/recorder.mp3.min.js"></script>
+
 <script src="/static/bootstrap/js/jquery.cookie.js"></script>
+<script src="/static/bootstrap/js/recorder.mp3.min.js"></script>
+
 <script>
-    
+
     var grade_color = ["",
         "rgb(133, 228, 235)",
         "rgb(145, 232, 200)",
@@ -111,6 +113,7 @@
     function recStop(){
         rec.stop(function(blob,duration){
             console.log(blob,(window.URL||webkitURL).createObjectURL(blob),"时长:"+duration+"ms");
+            
             rec.close();//释放录音资源，当然可以不释放，后面可以连续调用start；但不释放时系统或浏览器会一直提示在录音，最佳操作是录完就close掉
             rec=null;
             
@@ -118,8 +121,8 @@
 
             /*** 【实现上传】 ***/
             var form=new FormData();
-            var uid = {{user_id|safe}};
             var qid = {{question_id|safe}};
+            var uid = {{user_id|safe}};
             form.append("upfile", blob, uid+"_"+qid); //和普通form表单并无二致，后端接收到upfile参数的文件，文件名为recorder.mp3
             //...其他表单参数
             $.ajax({
@@ -162,7 +165,7 @@
             recStop();
         }
     }
-    doc_score_dic = {1:0, 2:0, 3:0, 4:0, 5:0, 6:0, 0:0, 7:0, 8:0, 9:0, 'total': 0, 'answer': ""};
+    doc_score_dic = {1:0, 2:0, 3:0, 4:0, 5:0, 6:0, 0:0, 7:0, 8:0, 9:0, 'total': 0, 'answer': "",'diff': 0};
     function no_answer(){
         doc_score_dic['answer'] = "None";
         var bt = document.getElementById("no-answer-button")
@@ -218,17 +221,17 @@
 <h3 style="text-align: center; font-size: 45px; color: white" >查询{{ question_id }}:</h3>
 <h3 style="text-align: center; font-size: 45px; color: white" > {{ query }}</h3>
 
-
 <div class="row justify-content-center" id="annt-btn" style="color: white; font-size: 18px;">
-    请录制问题的答案：
+    请录制问题的答案或说明解决问题需要怎样利用查询结果：
         <input type = "button" class="my-button" onclick="record()" value = "开始录制" id = "record-button" style="background-color: white; display: inline; height: 35px; width: 300px;"/>
         <input type = "button" class="my-button" onclick="no_answer()" value = "没有答案请点这里" id = "no-answer-button" style="background-color: white; display: inline; height: 35px; width: 190px;"/>
 </div>
-<div class="row justify-content-center" id="annt-btn" style="color: white; font-size: 18px;">
+<div class="row justify-content-center" id="annt-btn" style="color: white; font-size: 18px; margin-bottom: 80px;">
     或在文本框中回答问题：<input type="text" id="user-answer" placeholder="请输入问题的答案" style="display: inline; height: 35px; width: 600px; ">
 </div>
 
-<div class="container mt-2" >
+<div class="container mt-2" style="color: white; font-size: 30px; text-align: center; ">
+    搜索结果有用性标注：
     <div class="row tm-albums-container" id="result_list">
         {% for item in img_list %} 
             <figure class="effect-sadie image" style="margin:60px">
@@ -261,7 +264,25 @@
 
         <input type="hidden" name="grade" id="grade">
             <!-- <div class="row justify-content-around"> -->
-                <h3 style="text-align: center; color: white">搜索过程体验：</h3>
+                <h3 style="text-align: center; color: white; ">问题难度标注：</h3>
+                <div class="row justify-content-around" style="margin-bottom: 60px;">
+                    <div class="col-2 align-self-center">
+                        <div class="my-button" onclick="set_doc_score('diff',1)" id="grade-btn1-diff" style="background-color: rgb(133, 228, 235);">非常困难</div>
+                    </div>
+                    <div class="col-2 align-self-center">
+                        <div class="my-button" onclick="set_doc_score('diff',2)" id="grade-btn2-diff" style="background-color: rgb(145, 232, 200);">困难</div>
+                    </div>
+                    <div class="col-2 align-self-center">
+                        <div class="my-button" onclick="set_doc_score('diff',3)" id="grade-btn3-diff" >一般</div>
+                    </div>
+                    <div class="col-2 align-self-center">
+                        <div class="my-button" onclick="set_doc_score('diff',4)" id="grade-btn4-diff" style = "background-color: rgb(180, 235, 145);">简单</div>
+                    </div>
+                    <div class="col-2 align-self-center">
+                        <div class="my-button" onclick="set_doc_score('diff',5)" id="grade-btn5-diff" style = "background-color: rgb(199, 235, 133);">非常简单</div>
+                    </div>
+                </div>
+                <h3 style="text-align: center; color: white">搜索体验标注：</h3>
                 <div class="row justify-content-around">
                     <div class="col-2 align-self-center">
                         <div class="my-button" onclick="set_doc_score('total',1)" id="grade-btn1-total" style="background-color: rgb(133, 228, 235);">非常不满意</div>

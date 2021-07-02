@@ -22,13 +22,18 @@ class QueryModel:
         return self.user_data[user_id]['curr_id']
 
     # 添加新用户，问卷结果初始值为-1，表示该问题未被回答
-    def add_new_user(self, user_id):
+    def add_new_user(self, user_id, user_name):
         self.user_data[user_id] = {}
         self.user_data[user_id]['end_info'] = {}
         self.user_data[user_id]['curr_id'] = 0
         self.user_data[user_id]['action_list'] = []
         with open('../../random_data/' + str(user_id) + '.json', encoding='UTF-8') as f:
             self.user_data[user_id]['questions'] =  json.load(f)
+        if os.path.exists('../../user_data/'+str(user_id)) == False:
+            os.mkdir('../../user_data/'+str(user_id))
+        with open('../../user_data/'+str(user_id)+'/end_info.txt','a') as f:
+            f.write(str(user_name))
+            f.write('\n')
     
     def add_action(self, user_id, action):
         self.user_data[user_id]['action_list'].append(action)

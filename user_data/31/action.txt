@@ -1,0 +1,15 @@
+{'quesion_id': 0, 'doc_id': 15, 'ans': 9, 'time_stamp': 1625213405.2006683}
+{'quesion_id': 0, 'doc_id': 0, 'ans': 6, 'time_stamp': 1625213407.0432277}
+{'quesion_id': 0, 'doc_id': 0, 'ans': 7, 'time_stamp': 1625213412.1642392}
+{'quesion_id': 0, 'doc_id': 0, 'ans': 7, 'time_stamp': 1625213424.456152}
+{'quesion_id': 0, 'doc_id': 0, 'ans': 7, 'time_stamp': 1625213435.5681314}
+{'quesion_id': 0, 'doc_id': 0, 'ans': 7, 'time_stamp': 1625213538.6429627}
+{'quesion_id': 0, 'doc_id': 15, 'ans': 9, 'time_stamp': 1625213636.690221}
+{'quesion_id': 0, 'doc_id': 0, 'ans': 6, 'time_stamp': 1625213637.6374254}
+{'quesion_id': 0, 'doc_id': 0, 'ans': 7, 'time_stamp': 1625213642.9330125}
+{'quesion_id': 0, 'doc_id': 0, 'ans': 7, 'time_stamp': 1625213844.3427649}
+{'quesion_id': 0, 'doc_id': 0, 'ans': 7, 'time_stamp': 1625213894.4934547}
+{'quesion_id': 0, 'doc_id': 0, 'ans': 7, 'time_stamp': 1625213913.6088848}
+{'quesion_id': 0, 'doc_id': 0, 'ans': 7, 'time_stamp': 1625213922.2509768}
+{'quesion_id': 0, 'doc_id': 0, 'ans': 7, 'time_stamp': 1625213937.7776012}
+{'quesion_id': 1, 'doc_id': 15, 'ans': 9, 'time_stamp': 1625213956.309123}
