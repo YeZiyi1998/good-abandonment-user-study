@@ -28,7 +28,7 @@ def clean(total_dic):
 
 dis_select_id = [40, 44, 47, 50, 55, 63, 64, 80]
 def get_raw():
-    raw_file = json.load(open('../random_data/raw_90.json'))
+    raw_file = json.load(open('../random_data/raw_90_old.json'))
     lost_after_qid_number = {}
     after_qid = []
     for i in range(4, -1, -1):
