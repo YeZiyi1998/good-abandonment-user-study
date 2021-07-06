@@ -44,6 +44,10 @@
 
 {% block extra_script %}
 <script>
+    $(function() {
+        $('.my-button').dblclick(false);
+    });
+
     var show_abandon = {{ show_abandon | safe }};
     var show_cross = {{ show_cross | safe }}
     if(show_abandon == 0){
