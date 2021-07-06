@@ -73,7 +73,7 @@ def process_question_post(request, question_id, doc_id, user_name, user_id):
     time.sleep(0.1)
     send_trigger(doc_id+10)
     
-    model.add_action(user_id, {"quesion_id":question_id,"doc_id":doc_id,"ans":ans,"time_stamp":time.time()})
+    model.add_action(user_id, {"quesion_id":question_id, "doc_id":doc_id, "ans":ans,"time_stamp":time.time()})
     
     if question_id == model.get_question_numbers(user_id):
         print("ans")
