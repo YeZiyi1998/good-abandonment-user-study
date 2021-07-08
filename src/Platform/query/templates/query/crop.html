@@ -44,10 +44,14 @@
 
 {% block extra_script %}
 <script>
-    $(function() {
-        $('.my-button').dblclick(false);
-    });
-
+    var goon = true;
+    function check_form_data(){
+    if(goon){
+        goon = false;
+        return true;
+    }
+    return false;
+    }
     var show_abandon = {{ show_abandon | safe }};
     var show_cross = {{ show_cross | safe }}
     if(show_abandon == 0){
@@ -95,7 +99,7 @@
     <div class="container"  id="img-pair">
 
         <form name="question" action="{% url 'query:questions' question_id doc_id user_name user_id %}"
-               method="post" style="visibility: hidden;" id = "choice">
+               method="post" style="visibility: hidden;" id = "choice" onsubmit="return check_form_data()">
         {% csrf_token %}
 
 

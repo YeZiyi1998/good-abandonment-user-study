@@ -87,10 +87,10 @@
     <form name="login" action="{% url 'query:homepage' %}"
           onsubmit="return validateForm();" method="post">
     {% csrf_token %}
-    <input type="text" name="user_name">
+    <input type="text" name="user_name" autocomplete="off" >
     <p> 请输入用户序号: </p>
     <form name="login_id" action="{% url 'query:homepage' %}"
-          onsubmit="return validateForm();" method="post">
+          onsubmit="return validateForm();" method="post" autocomplete="off" >
     {% csrf_token %}
     <input type="text" name="user_id">
     <input type="submit" value="确定">
