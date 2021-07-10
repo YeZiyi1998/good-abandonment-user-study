@@ -1,6 +1,10 @@
 import json
 import demjson
-user_name_list = range(0,5)
+user_name_list = list(range(0,8))
+user_name_list = [str(item) for item in user_name_list]
+# user_name_list.append('pilot')
+# user_name_list.append('pilot2')
+
 
 def load_end_info(user_name):
     q2end_info = {}
@@ -8,7 +12,10 @@ def load_end_info(user_name):
         for line in f.readlines():
             line_list = line.split('\t')
             if line_list[0] != '-1' and len(line_list) > 1:
-                q2end_info[int(line_list[0])] = json.loads(line_list[1])
+                if 'pilot' in user_name:
+                    q2end_info[int(line_list[0])-1] = json.loads(line_list[1])
+                else:
+                    q2end_info[int(line_list[0])] = json.loads(line_list[1])
     return q2end_info 
 
 def add2dic(q_d_info, q, d, k, v):
@@ -31,6 +38,7 @@ double_rate = 0
 for user_name in user_name_list:
     end_info = load_end_info(user_name)
     action_list = []
+    print(user_name)
     with open('../../user_data/'+str(user_name)+'/action.txt', encoding='gbk') as f:
         for line in f.readlines():
             action_list.append(demjson.decode(line))
@@ -52,13 +60,15 @@ for user_name in user_name_list:
                     add2dic(q_d_info, qid, did, user_name, 'good abandonment')
                 elif end_info[qid][str(did)] <= 2 and end_info[qid][str(did)] >= 1:
                     add2dic(q_d_info, qid, did, user_name, 'bad abandonment')
+
 for user_name in user_name_list:
     total_dic = {'good click':0, 'bad click': 0, 'good abandonment': 0, 'bad abandonment': 0}
     for q in q_d_info.keys():
         for d in q_d_info[q].keys():
             if user_name in q_d_info[q][d].keys():
                 total_dic[q_d_info[q][d][user_name]] += 1
-    print(user_name, ' ', total_dic)
+    # print(user_name, ' ', total_dic)
+    print(';'.join([str(v) for v in list(total_dic.values())]))
 
 total_dic = {'good click':0, 'bad click': 0, 'good abandonment': 0, 'bad abandonment': 0}
 for user_name in user_name_list:
@@ -67,5 +77,6 @@ for user_name in user_name_list:
             if user_name in q_d_info[q][d].keys():
                 total_dic[q_d_info[q][d][user_name]] += 1
 print('total', ' ', total_dic)
+print(';'.join([str(v) for v in list(total_dic.values())]))
 print('double rate', double_rate)
 
