@@ -2,7 +2,7 @@ import pandas as pd
 import json
 import demjson
 
-user_id_list = ['0','1','2','3','4','5','6','7','8','pilot','pilot2']
+user_id_list = ['9','10']
 for user_id in user_id_list:
     random_file = json.load(open('../random_data/'+str(user_id)+'.json'))
 
