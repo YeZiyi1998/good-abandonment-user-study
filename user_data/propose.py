@@ -2,7 +2,7 @@ import pandas as pd
 import json
 import demjson
 
-user_id_list = ['9','10']
+user_id_list = ['pilot2','pilot']
 for user_id in user_id_list:
     random_file = json.load(open('../random_data/'+str(user_id)+'.json'))
 
@@ -12,10 +12,14 @@ for user_id in user_id_list:
             line_list = line.split('\t')
             if line_list[0] != '-1' and len(line_list) > 1:
                 if 'pilot' in str(user_id):
+                    # print(str(int(line_list[0])-1))
+                    # print(line_list[1])
+                    # input()
                     end_info[str(int(line_list[0])-1)] = json.loads(line_list[1])
                 else:
+                    print("go in")
                     end_info[str(line_list[0])] = json.loads(line_list[1])
-
+    print(end_info['1'])
     action = {}
     with open(str(user_id)+'/action.txt','r',encoding='gbk') as f:
         lines = list(f.readlines())
